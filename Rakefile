@@ -1,6 +1,8 @@
 require "rubygems"
 require "bundler/setup"
 require "stringex"
+require "fileutils"
+require "time"
 
 ## -- Rsync Deploy config -- ##
 # Be sure your public key is listed in your server's ~/.ssh/authorized_keys file
@@ -8,17 +10,17 @@ ssh_user       = "user@domain.com"
 ssh_port       = "22"
 document_root  = "~/website.com/"
 rsync_delete   = true
-deploy_default = "rsync"
+deploy_default = "heroku"
 
 # This will be configured for you when you run config_deploy
-deploy_branch  = "gh-pages"
+deploy_branch  = "master"
 
 ## -- Misc Configs -- ##
 
 public_dir      = "public"    # compiled site directory
 source_dir      = "source"    # source file directory
 blog_index_dir  = 'source'    # directory for your blog's index page (if you put your index in source/blog/index.html, set this to 'source/blog')
-deploy_dir      = "_deploy"   # deploy directory (for Github pages deployment)
+deploy_dir      = "_heroku"   # deploy directory (for Github pages deployment)
 stash_dir       = "_stash"    # directory to stash posts for speedy generation
 posts_dir       = "_posts"    # directory for blog files
 themes_dir      = ".themes"   # directory for blog files
@@ -53,6 +55,15 @@ task :generate do
   puts "## Generating Site with Jekyll"
   system "compass compile --css-dir #{source_dir}/stylesheets"
   system "jekyll"
+end
+
+desc "Generate jekyll site in preview mode"
+task :generate_preview do
+  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+  puts "## Generating Site with Jekyll in preview mode"
+  system "compass compile --css-dir #{source_dir}/stylesheets"
+  jekyllPid = Process.spawn({"OCTOPRESS_ENV"=>"preview"}, "jekyll")
+  Process.wait(jekyllPid)
 end
 
 desc "Watch the site and regenerate when it changes"
@@ -105,10 +116,12 @@ task :new_post, :title do |t, args|
     post.puts "layout: post"
     post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
     post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M')}"
+    post.puts "published: false"
     post.puts "comments: true"
     post.puts "categories: "
     post.puts "---"
   end
+  system "subl \"#{filename}\""
 end
 
 # usage rake new_page[my-new-page] or rake new_page[my-new-page.html] or rake new_page (defaults to "new-page.markdown")
@@ -145,6 +158,7 @@ task :new_page, :filename do |t, args|
       page.puts "footer: true"
       page.puts "---"
     end
+    system "subl \"#{file}\""
   else
     puts "Syntax error: #{args.filename} contains unsupported characters"
   end
@@ -202,12 +216,42 @@ task :update_source, :theme do |t, args|
   puts "## Updated #{source_dir} ##"
 end
 
+desc "Rename files in the posts directory if the filename does not match the post date in the YAML front matter"
+task :rename_posts do
+  Dir.chdir("#{source_dir}/#{posts_dir}") do
+    Dir['*.markdown'].each do |post|
+      post_date = ""
+      File.open( post ) do |f|
+        f.grep( /^date: / ) do |line|
+          post_date = line.gsub(/date: /, "").gsub(/\s.*$/, "")
+        end
+      end
+      post_title = post.to_s.gsub(/\d{4}-\d{2}-\d{2}/, "")  # Get the post title from the currently processed post
+      new_post_name = post_date + post_title # determing the correct filename
+      is_draft = false
+      File.open( post ) do |f|
+          f.grep( /^published: false/ ) do |line|
+            is_draft = true
+            break
+          end
+      end
+      if !is_draft && post != new_post_name     
+          puts "renaming #{post} to #{new_post_name}"
+          FileUtils.mv(post, new_post_name)
+      end
+    end
+  end
+end
+
+
 ##############
 # Deploying  #
 ##############
 
 desc "Default deploy task"
 task :deploy do
+  # Fix any posts before deployment
+  Rake::Task[:rename_posts].execute
   # Check if preview posts exist, which should not be published
   if File.exists?(".preview-mode")
     puts "## Found posts in preview mode, regenerating files ..."
@@ -256,6 +300,25 @@ multitask :push do
     puts "\n## Pushing generated #{deploy_dir} website"
     system "git push origin #{deploy_branch} --force"
     puts "\n## Github Pages deploy complete"
+  end
+end
+
+desc "deploy basic rack app to heroku"
+multitask :heroku do
+  puts "## Deploying to Heroku "
+  (Dir["#{deploy_dir}/public/*"]).each { |f| rm_rf(f) }
+  system "cp config.ru #{deploy_dir}/"
+  system "cp -R #{public_dir}/* #{deploy_dir}/public"
+  puts "\n## copying #{public_dir} to #{deploy_dir}/public"
+  cd "#{deploy_dir}" do
+    system "git add ."
+    system "git add -u"
+    puts "\n## Committing: Site updated at #{Time.now.utc}"
+    message = "Site updated at #{Time.now.utc}"
+    system "git commit -m '#{message}'"
+    puts "\n## Pushing generated #{deploy_dir} website"
+    system "git push heroku #{deploy_branch}"
+    puts "\n## Heroku deploy complete"
   end
 end
 

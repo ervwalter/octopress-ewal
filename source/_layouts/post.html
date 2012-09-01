@@ -1,0 +1,23 @@
+---
+layout: default
+single: true
+---
+
+{% capture categories %}{% if post %}{{ post.categories }}{% else %}{{ page.categories }}{% endif %}{% endcapture %}
+{% if categories contains 'TrendWeight' %}
+	<img src="/images/trendweight-square.png" style="display:none;" />
+{% endif%}
+
+
+
+<article class="post">{% include article.html %}</article>
+{% unless page.sharing == false %}
+	{% include post/sharing.html %}
+{% endunless %}
+{% if site.disqus_short_name and page.comments == true %}
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
+</section>
+{% endif %}
+{% include custom/me.html %}

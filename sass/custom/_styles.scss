@@ -1,0 +1,306 @@
+// This File is imported last, and will override other styles in the cascade
+// Add styles here to make changes without digging in too much
+
+
+/* FancyBox Galleries */
+$rad: 6px;
+ul.gallery {
+  text-align: left;
+  padding: 5px;
+  li {
+    display: inline;
+    padding: 5px;
+  }
+}
+
+a img {
+	border: none;
+}
+
+.right
+{
+	float: right;
+	margin-top: 10px;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.clear
+{
+	clear: both;
+}
+
+.border img
+{
+	padding: 10px;
+	border: 1px solid $color-gray03;
+}
+
+.googleplus-hidden {
+  position: absolute;
+  top: -1000em;
+  left: -1000em;
+}
+
+#trendweight-header
+{
+	margin-top: 20px;
+	display: table;
+	font-size: 1.2em;
+
+	div
+	{
+		display: table-cell;
+		vertical-align: middle;
+		padding-right: 20px;
+	}
+
+	#trendweight-guy
+	{
+		height: 100px;
+	}
+
+	#trendweight-logo
+	{
+	}
+
+	#trendweight-updates
+	{
+		padding-left: 15px;
+	}
+
+	p
+	{
+		padding-bottom: 0.3em;
+	}
+
+	a
+	{
+	}
+
+}
+
+.trendweight-intro
+{
+	font-size: 1.2em;
+}
+
+#me
+{
+	text-align: left;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: $color-gray04;
+	min-height: 100px;
+	font-size: 1.2em;
+	img
+	{
+		padding-left: 40px;
+		height: 100px;
+		float: right;
+	}
+
+	p + p
+	{
+		padding-top: 10px;
+	}
+
+	a
+	{
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+
+	a:first-of-type
+	{
+		padding-left: 0;
+	}
+
+}
+
+.site-title
+{
+	color: $color-main;
+}
+
+#header h1 a:hover
+{
+	color: $color-gray01;
+}
+
+figure.code td.code
+{
+	//padding-left: 0px;
+}
+
+article
+{
+	a
+	{
+		font-weight: bold;
+	}
+
+	h1
+	{
+		font-size: 1.3em;
+	}
+
+	h2
+	{
+		font-size: 1.2em;
+	}
+
+	h3
+	{
+		font-size: 1.1em;
+	}
+
+	h1 + p, h2 + p, h3 + p
+	{
+		margin-top: 0px !important;
+	}
+
+	h1.title
+	{
+		font-size: 1.7em;
+		margin-bottom: 5px;
+	}
+
+	div
+	{
+		&.date, &.tags
+		{
+			font-size: 1.2em;
+		}
+
+		&.date
+		{
+			color: $color-gray03;
+		}
+
+		&.tags
+		{
+			color: $color-gray03;
+			margin-top: 20px;
+
+			a
+			{
+				font-weight: normal;
+			}
+		}
+	}
+}
+
+.category-description
+{
+	margin-top: 20px;
+
+	h1
+	{
+		font-weight: normal;
+		font-size: 2em;
+	}
+}
+
+article:first-of-type
+{
+	border-top: none;
+}
+
+.archives article {
+	margin-left: 0;
+
+
+
+	h1.title
+	{
+		margin-left: 200px;
+		font-weight: normal;
+
+		a
+		{
+			font-weight: normal;
+		}
+	}
+
+	span.date
+	{
+		position: absolute;
+		font-size: 1.2em;
+		top: 1.4em;
+		left: 100px;
+	}
+
+	div.tags
+	{
+		margin-left: 200px;
+		margin-top: 0;
+	}
+
+}
+
+@media screen and (max-width: 600px)
+{
+	.right
+	{
+		float: inherit;
+		margin-left: 0;
+	}
+
+	.border img
+	{
+		padding: 0;
+		border: inherit;
+	}
+
+	.trendweight-intro
+	{
+		font-size: 1em;
+	}
+
+	#trendweight-header 
+	{
+		div
+		{
+			display: block;
+			vertical-align: inherit;
+			padding-right: 0px;
+		}
+
+		#trendweight-guy
+		{
+			display: none;
+		}
+
+		#trendweight-updates
+		{
+			padding-top: 20px;
+			padding-left: 0;
+		}
+	}
+
+	.archives article
+	{
+		&:first-of-type
+		{
+			padding-top: 0;
+		}	
+		
+		h1.title
+		{
+			font-size: 1.5em;
+			margin-left: 0;
+			line-height: inherit;
+		}
+
+		span.date, div.tags
+		{
+			position: relative;
+			font-size: 1em;
+			margin-top: 0;
+			margin-left: 0;
+			top: auto;
+			left: auto;
+		}
+	}
+}
