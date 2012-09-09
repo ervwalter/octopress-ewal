@@ -83,11 +83,6 @@ module OctopressLiquidFilters
     end
   end
 
-  def remove_linenumbers(input)
-    input.gsub(/\<td\ class="gutter"\>/, '<td class="gutter" style="display:none">')
-    #input.gsub(/gutter/, 'butter')
-  end
-
   # Improved version of Liquid's truncate:
   # - Doesn't cut in the middle of a word.
   # - Uses typographically correct ellipsis (…) insted of '...'

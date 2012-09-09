@@ -22,6 +22,8 @@ use Rack::Rewrite do
   r301 %r{.*}, 'http://www.ewal.net/trendweight/', :host => "blog.trendweight.com"
   r301 %r{^/shazam.php}, 'https://sourceforge.net/projects/hmdj/'
   r301 %r{^/hmdj-docs}, 'https://sourceforge.net/projects/hmdj/'
+  r301 %r{^/_shazam.aspx}, 'https://sourceforge.net/projects/hmdj/'
+  r301 %r{^/hmdj/}, 'https://sourceforge.net/projects/hmdj/'
   r301 %r{^/PermaLink,guid,f314a8bc-4a97-4a77-b2de-c2771b77f222.aspx}, 'http://www.iis.net/download/urlrewrite'
 end
 

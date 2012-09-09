@@ -83,7 +83,11 @@ figure.code{
 			margin: -5px -15px 0;
 			padding: 5px 15px;
 			display: block;
-			@include background(linear-gradient(top, $pre-border, $pre-bg));
+			text-align: center;
+			@include border-top-left-radius(5px);
+			@include border-top-right-radius(5px);
+			@include background(linear-gradient(top, $color-gray03, darken($color-gray03, 10%)));
+			color: $color-gray01;
 			&:empty{
 				display: none;
 			}
