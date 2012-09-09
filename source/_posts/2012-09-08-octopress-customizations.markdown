@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Octopress Customizations"
-date: 2012-09-08 20:43
+date: 2012-09-08 22:22
 published: true
 comments: true
 categories: Octopress
@@ -41,12 +41,12 @@ Note, I think /blog/ has been removed from URLs by default in the next version o
 
 Code snippets in Octopress are nicely formatted with syntax highlighting when you visit the actual web site.  However, that formatting does not appear when a blog post is viewed in an feed reader like Google Reader because the web site's CSS is not getting applied. The result isn't horrible, but one thing that annoyed me was that line numbers still appear but without any padding between the line numbers and the code lines.  I felt the result was actually pretty hard to read.  My solution is to make the line numbers not appear in the Atom version of the post markup.
 
-There are two parts to making this work.  First, I defined a new Liquid filter that looked for the column of line numbers and removes it.  Note, I originally tried just hiding the colum, but Google Reader strips out HTML style attributes for security reasons.
+There are two parts to making this work.  First, I defined a new Liquid filter that looked for the column of line numbers and removes it.  Note, I originally tried just hiding the column, but Google Reader strips out HTML style attributes for security reasons.
 
 ``` ruby ./plugins/custom_filters.rb
 module CustomLiquidFilters
   def remove_linenumbers(input)
-    input.gsub(/\<td\ class="gutter"\>.+?\<td\ class\=\'code\'\>/m, "<td class='code'>")
+    input.gsub(/\<td\ class="gutter"\>.+?\<\/td\>/m, ' ')
   end
 end
 

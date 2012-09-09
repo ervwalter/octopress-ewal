@@ -23,7 +23,7 @@ isfeed: true
     <updated>{{ post.date | date_to_xmlschema }}</updated>
     <id>{{ site.url }}{{ post.id }}</id>
     {% for category in post.categories %}<category scheme="{{ site.url }}/categories/" term="{{ category | replace: ' ','-' | downcase }}" />{% endfor %}
-    <content type="html"><![CDATA[{{ post.content | remove_linenumbers | expand_urls: site.url | cdata_escape }}]]></content>
+    <content type="html"><![CDATA[{{ post.content | remove_linenumbers | remove_figcaption | expand_urls: site.url | cdata_escape }}]]></content>
   </entry>
   {% endfor %}
 </feed>
