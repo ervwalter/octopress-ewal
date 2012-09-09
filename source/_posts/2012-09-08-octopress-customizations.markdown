@@ -131,10 +131,14 @@ I use [fancyBox](http://fancyapps.com/fancybox/) with some of my images in blog 
 To actually create blog posts with images that are enabled for fancybox, I use the Octopress [image tag](http://octopress.org/docs/plugins/image-tag/) and include a fancybox css class on images.
 
 {% raw %}
-    {% img fancybox /stuff/currentcost-ct-clamp.jpg %}
+    {% img fancybox /stuff/currentcost-transmitter1.jpg 120 %}
 {% endraw %}
 
-And then I have a bit of javascript that adjusts the generated markup so that it works with fancybox.
+That results in an image like this... (click to activate the fancybox light box)
+
+{% img fancybox /stuff/currentcost-transmitter1.jpg 120 %}
+
+I have a bit of javascript that adjusts the generated markup so that it works with fancybox.  It wraps the `<img />` tag with the `<a></a>` tag that fancybox expects.  Any classes on the image tag are moved to the new anchor tag and the caption is copied to the anchor as well.  Also, all of the images in a given post are added to a fancybox gallery.  It's done per-post so that when viewing the main index of the blog, unrelated images don't end up getting added to one large gallery.
 
 ``` js
 $(function()) {
