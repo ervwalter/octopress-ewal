@@ -2,7 +2,7 @@
 layout: post
 title: "Octopress Customizations"
 date: 2012-09-08 19:51
-published: false
+published: true
 comments: true
 categories: Octopress
 ---
