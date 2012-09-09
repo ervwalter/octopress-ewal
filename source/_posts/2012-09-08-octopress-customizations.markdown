@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Octopress Customizations"
-date: 2012-09-08 19:51
+date: 2012-09-08 20:43
 published: true
 comments: true
 categories: Octopress
@@ -41,14 +41,15 @@ Note, I think /blog/ has been removed from URLs by default in the next version o
 
 Code snippets in Octopress are nicely formatted with syntax highlighting when you visit the actual web site.  However, that formatting does not appear when a blog post is viewed in an feed reader like Google Reader because the web site's CSS is not getting applied. The result isn't horrible, but one thing that annoyed me was that line numbers still appear but without any padding between the line numbers and the code lines.  I felt the result was actually pretty hard to read.  My solution is to make the line numbers not appear in the Atom version of the post markup.
 
-There are two parts to making this work.  First, I defined a new Liquid filter that looked for the column of line numbers and inserted a style attribute to hide it.
+There are two parts to making this work.  First, I defined a new Liquid filter that looked for the column of line numbers and removes it.  Note, I originally tried just hiding the colum, but Google Reader strips out HTML style attributes for security reasons.
 
 ``` ruby ./plugins/custom_filters.rb
 module CustomLiquidFilters
   def remove_linenumbers(input)
-    input.gsub(/\<td\ class="gutter"\>/, '<td class="gutter" style="display:none">')
+    input.gsub(/\<td\ class="gutter"\>.+?\<td\ class\=\'code\'\>/m, "<td class='code'>")
   end
 end
+
 Liquid::Template.register_filter CustomLiquidFilters
 ```
 
@@ -57,7 +58,7 @@ Second, I edited ./source/atom.xml and added the new filter.
 {% raw %}
 ``` xml ./source/atom.xml
   <entry>
-  	... other elements ...
+    ... other elements ...
     <content type="html"><![CDATA[{{ post.content | remove_linenumbers | expand_urls: site.url | cdata_escape }}]]></content>
   </entry>
 ```
@@ -70,7 +71,7 @@ I also added post category information to the Atom feed. This is also just a cou
 {% raw %}
 ``` xml ./source/atom.xml
   <entry>
-  	... other elements ...
+    ... other elements ...
     {% for category in post.categories %}
     <category scheme="{{ site.url }}/categories/" term="{{ category | replace: ' ','-' | downcase }}" />
     {% endfor %}
@@ -95,7 +96,7 @@ date: 2012-08-11 23:20
 ---
 
 <div>
-	<ul id="category-list">{% category_list counter:true %}</ul>
+  <ul id="category-list">{% category_list counter:true %}</ul>
 </div>
 ```
 {% endraw %}
@@ -137,21 +138,21 @@ And then I have a bit of javascript that adjusts the generated markup so that it
 
 ``` js
 $(function()) {
-	$('.entry-content').each(function(i){
-		var _i = i;
-		$(this).find('img.fancybox').each(function(){
-			var img = $(this);
-			var title = img.attr("title");
-			var classes = img.attr("class");
-			img.removeAttr("class");
-			img.wrap('<a href="'+this.src+'" class="' + classes + '" rel="gallery'+_i+'" />');
-			if (title != "")
-			{
-				img.parent().attr("title", title);
-			}
-		});
-	});
-	$('.fancybox').fancybox();
+  $('.entry-content').each(function(i){
+    var _i = i;
+    $(this).find('img.fancybox').each(function(){
+      var img = $(this);
+      var title = img.attr("title");
+      var classes = img.attr("class");
+      img.removeAttr("class");
+      img.wrap('<a href="'+this.src+'" class="' + classes + '" rel="gallery'+_i+'" />');
+      if (title != "")
+      {
+        img.parent().attr("title", title);
+      }
+    });
+  });
+  $('.fancybox').fancybox();
 });
 ```
 
@@ -205,6 +206,7 @@ task :rename_posts do
       File.open( post ) do |f|
         f.grep( /^date: / ) do |line|
           post_date = line.gsub(/date: /, "").gsub(/\s.*$/, "")
+          break
         end
       end
       post_title = post.to_s.gsub(/\d{4}-\d{2}-\d{2}/, "")  # Get the post title from the currently processed post

@@ -224,6 +224,7 @@ task :rename_posts do
       File.open( post ) do |f|
         f.grep( /^date: / ) do |line|
           post_date = line.gsub(/date: /, "").gsub(/\s.*$/, "")
+          break
         end
       end
       post_title = post.to_s.gsub(/\d{4}-\d{2}-\d{2}/, "")  # Get the post title from the currently processed post
