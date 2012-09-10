@@ -57,10 +57,10 @@ Second, I edited ./source/atom.xml and added the new filter.
 
 {% raw %}
 ``` xml ./source/atom.xml
-  <entry>
-    ... other elements ...
-    <content type="html"><![CDATA[{{ post.content | remove_linenumbers | expand_urls: site.url | cdata_escape }}]]></content>
-  </entry>
+<entry>
+  ... other elements ...
+  <content type="html"><![CDATA[{{ post.content | remove_linenumbers | expand_urls: site.url | cdata_escape }}]]></content>
+</entry>
 ```
 {% endraw %}
 
@@ -70,12 +70,12 @@ I also added post category information to the Atom feed. This is also just a cou
 
 {% raw %}
 ``` xml ./source/atom.xml
-  <entry>
-    ... other elements ...
-    {% for category in post.categories %}
-    <category scheme="{{ site.url }}/categories/" term="{{ category | replace: ' ','-' | downcase }}" />
-    {% endfor %}
-  </entry>
+<entry>
+  ... other elements ...
+  {% for category in post.categories %}
+  <category scheme="{{ site.url }}/categories/" term="{{ category | replace: ' ','-' | downcase }}" />
+  {% endfor %}
+</entry>
 ```
 {% endraw %}
 
