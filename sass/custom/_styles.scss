@@ -1,6 +1,11 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
+h1, h2, h3, h4, h5, h6
+{
+	font-family: $font-heading;
+}
+
 
 /* FancyBox Galleries */
 $rad: 6px;
@@ -87,16 +92,34 @@ img.thumb, a.thumb img
 
 }
 
+header, div.tags, span.date, div.date
+{
+	font-family: $font-heading;
+}
+
 .trendweight-intro
 {
-	font-size: 1.2em;
+	margin-top: 1em;
+	padding: 1em;
+	background-color: $color-gray05;
+
+	p
+	{
+		margin-top: 0 !important;
+	}
+
+	p + p
+	{
+		margin-top: 1em !important;
+	}
 }
 
 #me
 {
-	text-align: left;
-	margin: 20px auto;
-	padding: 20px;
+	font-family: $font-sans-serif;
+	text-align: justify;
+	margin: 1em auto;
+	padding: 1em;
 	background-color: $color-gray04;
 	min-height: 100px;
 	font-size: 1.2em;
@@ -149,37 +172,38 @@ article
 
 	h1
 	{
-		font-size: 1.5em;
+		font-size: 1.4em;
 	}
 
 	h2
 	{
-		font-size: 1.4em;
+		font-size: 1.3em;
 	}
 
 	h3
 	{
-		font-size: 1.3em;
-		margin-top: 10px !important;
-		margin-bottom: 4px;
+		font-size: 1.2em;
+		margin-top: 1em !important;
+		margin-bottom: 0.3em;
 	}
 
 	h1 + p, h2 + p, h3 + p
 	{
-		margin-top: 0px !important;
+		margin-top: 0 !important;
 	}
 
 	h1.title
 	{
-		font-size: 1.7em;
-		margin-bottom: 5px;
+		font-size: 1.5em;
+		line-height: inherit;
+		margin-bottom: 0;
 	}
 
 	div
 	{
 		&.date, &.tags
 		{
-			font-size: 1.2em;
+			font-size: 1.1em;
 		}
 
 		&.date
@@ -190,7 +214,7 @@ article
 		&.tags
 		{
 			color: $color-gray03;
-			margin-top: 20px;
+			margin-top: 1em;
 
 			a
 			{

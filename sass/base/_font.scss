@@ -1,5 +1,9 @@
-$font-default: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-sans-serif: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-serif: "Georgia", serif;
 $font-mono: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+
+$font-body: $font-serif;
+$font-heading: $font-sans-serif;
 
 $font-icon: FontAwesome;
 $font-icon-path: "/font/fontawesome-webfont";
