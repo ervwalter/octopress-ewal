@@ -22,7 +22,7 @@ Here are the topics covered in this blog post:
 - Setting up Rake-Rewrite
 - Making the 404 page actually return a 404 status
 - Notifying Google, Bing, and Ping-o-matic after I make new posts
-- Deployming to Heroku using an alternative approach
+- Deploying to Heroku using an alternative approach
 
 You can also see these changes in this [GitHub repository](https://github.com/ervwalter/octopress-ewal) if you prefer.
 
