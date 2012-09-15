@@ -16,5 +16,5 @@ _heroku
 *.sh
 source/google*.html
 tmp/restart.txt
-
+.idea
 source/BingSiteAuth.xml

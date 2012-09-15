@@ -9,7 +9,7 @@
 	<div class="tags">Posted in: {% include post/categories.html %}</div>
 {% else %}
 	<div class="date">{% include post/date.html %}{{ time }}</div>
-	<h1 class="title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
+	<h1 class="title">{% if site.titlecase %}{{ page.title | titlecase | smart_quotes }}{% else %}{{ page.title }}{% endif %}</h1>
 	<div class="entry-content">{{ content }}</div>
 	<div class="tags">Posted in: {% include post/categories.html %}</div>
 {% endif %}

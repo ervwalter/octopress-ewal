@@ -1,11 +1,19 @@
-module CustomLiquidFilters
-  def remove_linenumbers(input)
-    input.gsub(/\<td\ class="gutter"\>.+?\<\/td\>/m, ' ')
-  end
+require 'rubypants'
 
-  def remove_figcaption(input)
-    input.gsub(/\<figcaption\>.+?\<\/figcaption\>/m, ' ')
-  end
+module CustomLiquidFilters
+	def remove_linenumbers(input)
+		input.gsub(/\<td\ class="gutter"\>.+?\<\/td\>/m, ' ')
+	end
+
+	def remove_figcaption(input)
+		input.gsub(/\<figcaption\>.+?\<\/figcaption\>/m, ' ')
+	end
+
+	# replaces primes with smartquotes using RubyPants
+	def smart_quotes(input)
+	  require 'rubypants'
+	  RubyPants.new(input).to_html
+	end
 end
 
 Liquid::Template.register_filter CustomLiquidFilters
