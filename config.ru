@@ -25,6 +25,7 @@ use Rack::Rewrite do
   r301 %r{^/_shazam.aspx}, 'https://sourceforge.net/projects/hmdj/'
   r301 %r{^/hmdj/}, 'https://sourceforge.net/projects/hmdj/'
   r301 %r{^/PermaLink,guid,f314a8bc-4a97-4a77-b2de-c2771b77f222.aspx}, 'http://www.iis.net/download/urlrewrite'
+  r301 %r{^/AURLRedirectingURLRewritingHttpModule.aspx}, 'http://www.iis.net/download/urlrewrite' 
 end
 
 class SinatraStaticServer < Sinatra::Base  

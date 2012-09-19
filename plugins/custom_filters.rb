@@ -9,6 +9,10 @@ module CustomLiquidFilters
 		input.gsub(/\<figcaption\>.+?\<\/figcaption\>/m, ' ')
 	end
 
+	def category_slug(input)
+		input.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase
+	end
+
 	# replaces primes with smartquotes using RubyPants
 	def smart_quotes(input)
 	  require 'rubypants'
