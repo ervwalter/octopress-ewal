@@ -3,7 +3,7 @@ layout: post
 title: "FitBit Aria, Retina Displays, User Interface Improvements"
 date: 2012-07-09 15:17
 comments: true
-categories: TrendWeight
+categories: TrendWeight FitBit
 ---
 
 I just pushed a bunch of updates to the website. A lot of the user interface code changed and so it's possible that I introduced some new bugs in the process.  If you see something fishy, please let me know at [support@trendweight.com](mailto:support@trendweight.com).

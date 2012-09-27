@@ -3,7 +3,7 @@ layout: post
 title: "FitBit Aria Support: Coming Soon!"
 date: 2012-04-24 08:46
 comments: true
-categories: TrendWeight
+categories: TrendWeight FitBit
 ---
 
 {% img right /stuff/fitbit-aria.jpg 200 %}
