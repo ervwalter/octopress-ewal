@@ -15,12 +15,12 @@ That means that the vast majority of the time, things will just work automatical
 
 But what happens if you delete something from more than 14 days ago?  Because of the limitations of the FitBit API, it's not practical for me to automatically look through your entire list of historical weight readings and so if you do happen to make a change to weight data, for example, from 2 months ago, you'll need to let TrendWeight know about it.
 
-There is now a new button in your [account settings](https://trendweight.com/settings) to fully resynchronize all of your weight readings, no matter how long ago you made the change:
+There is now a new button in your [account settings](https://trendweight.com/settings) to fully resynchronize all of your weight readings, no matter how old any changes are:
 
 {% img fancybox /stuff/trendweight-resync.png %}
 
 Just click the __Resync All Data__ button and any changes you have made to old data will get correctly picked up in TrendWeight.
 
-Note, this button is also available for Withings scale users, but if you have a Withings scale, you'll generally not need to use this as the Withings API does tell me if you have updated or deleted old data and so those cases are always handled automatically.  But if you ever think the data looks fishy for some reason, you can try the Resync button to see if that helps.
+Note, this button is also available for Withings scale users, but if you have a Withings scale, you'll generally not need to use this as the Withings API tells me if you have updated or deleted old data and TrendWeight handles those changes automatically.  That said, if you ever think the data looks fishy, the resync button may come in handy.
 
 As always, if you have questions, email me at <support@trendweight.com>.
