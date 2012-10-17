@@ -4,7 +4,7 @@ title: "CoffeeScript and Knockout: Hello, World!"
 date: 2012-09-28 23:09
 published: true
 comments: true
-categories: CoffeeScript Knockout 
+categories: CoffeeScript Knockout
 ---
 
 I recently decided to try my hand at writing some [CoffeeScript](http://coffeescript.org/), and since a lot of my web development uses [Knockout](http://knockoutjs.com/), I was curious if the two would play nicely together.  It turns out that they fit together very well.
@@ -27,9 +27,9 @@ $ ->
 
 You can try this example live on [jsFiddle](http://jsfiddle.net/ervwalter/FNDep/).
 
-A couple things are worth pointing out in the example.  
+A few things are worth pointing out in the example.
 
-First is the use of `@`.  When I first started learning CoffeeScript, I missed the fact that `@` was an alias for `this`.  So in the example above, `@firstName` is equivalent to `this.firstName`.  
+First is the use of `@`.  When I first started learning CoffeeScript, I missed the fact that `@` was an alias for `this`.  So in the example above, `@firstName` is equivalent to `this.firstName`.
 
 The second thing to notice is that I used the fat arrow (`=>`) for the computed observable in order to ensure that `this` is set correctly when the function runs.  I could have alternatively passed `this` as a second parameter to `ko.computed()` but I think that the approach above is easier to read.
 
@@ -65,3 +65,5 @@ Note that the fat arrow (`=>`) has introduced the use of `_this` in the computed
 In the end, the score is 9 lines of CoffeeScript instead of 20 lines of JavaScript and the CoffeeScript version is (in my opinion) easier to read with a higher signal-to-noise ratio.
 
 This is just a very simple example, and it doesn't really exercise the full power of CoffeeScript. The next few posts will walk through a few more scenarios including CoffeeScript versions of some of the more complex Knockout samples and examples of how to use the Knockout mapping plugin with CoffeeScript.
+
+Next post in this series: [Knockout Samples in CoffeeScript](/2012/10/04/knockout-samples-in-coffeescript/)

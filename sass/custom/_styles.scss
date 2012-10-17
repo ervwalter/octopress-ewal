@@ -35,6 +35,12 @@ a img {
 	clear: both;
 }
 
+
+.center
+{
+    text-align: center;
+}
+
 .border img
 {
 	padding: 10px;
@@ -284,6 +290,11 @@ article:first-of-type
 
 }
 
+article .entry-content iframe
+{
+    border: 1px solid #ddd !important;
+}
+
 @media screen and (max-width: 600px)
 {
 	.right
@@ -303,7 +314,7 @@ article:first-of-type
 		font-size: 1em;
 	}
 
-	#trendweight-header 
+	#trendweight-header
 	{
 		div
 		{
@@ -329,8 +340,8 @@ article:first-of-type
 		&:first-of-type
 		{
 			padding-top: 0;
-		}	
-		
+		}
+
 		h1.title
 		{
 			font-size: 1.5em;
