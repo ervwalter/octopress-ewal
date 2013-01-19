@@ -39,7 +39,7 @@ Here, there is a binding on the btn-group element that says, "Hey, these buttons
 
 In the binding I ended up writing, the `data-value` attribute is actually optional.  If you are ok with the value of your observable being the same as the captions on your buttons, you can leave the attribute off and the binding will use the inner text of the button instead.
 
-While I was at it, I also made the binding handle this alternate markup where the binding is on each individual button instead of on the button group.  This may be useful if you want radio button behavior without putting the buttons in a button group.  And for variety, this markup specifies the value for each radio button with `radioValue` property in the binding itself (although you the `data-value` attribute still would work as well):
+While I was at it, I also made the binding handle the alternate markup below where the binding is on each individual button instead of on the button group.  This may be useful if you want radio button behavior without putting the buttons in a button group.  And for variety, this markup specifies the value for each radio button with `radioValue` property in the binding itself (although you the `data-value` attribute still would work as well):
 
 ``` html
 <div class="btn-group">
@@ -58,7 +58,7 @@ After all that, I felt empowered and thought I might as well make a binding for 
 </div>
 ```
 
-Before I get into the code for the bindings, here is a working [jsFiddle demo](http://jsfiddle.net/ervwalter/ccjn) that shows the user interface behavior I'm talking about.
+Before I get into the code for the bindings, here is a working [jsFiddle demo](http://jsfiddle.net/ervwalter/ccjnj) that shows the user interface behavior I'm talking about.
 
 {% jsfiddle ccjnj result,js,html,css %}
 
@@ -91,13 +91,13 @@ ko.bindingHandlers.radio = {
 
             $btn.on "click", ->
                 observable ko.utils.unwrapObservable(radioValue)
-                return # this is to prevent any unexpected side effects of returning odd things
+                return
 
             ko.computed disposeWhenNodeIsRemoved: btn, read: ->
                 $btn.toggleClass "active", observable() == ko.utils.unwrapObservable(radioValue)
-                return # this is to prevent any unexpected side effects of returning odd things
+                return
 
-        return # this is to prevent any unexpected side effects of returning odd things
+        return
 }
 
 ko.bindingHandlers.checkbox = {
@@ -111,13 +111,13 @@ ko.bindingHandlers.checkbox = {
 
         $element.on "click", ->
             observable not observable()
-            return # this is to prevent any unexpected side effects of returning odd things
+            return
 
         ko.computed disposeWhenNodeIsRemoved: element, read: ->
             $element.toggleClass "active", observable()
-            return # this is to prevent any unexpected side effects of returning odd things
+            return
 
-        return # this is to prevent any unexpected side effects of returning odd things
+        return
 }
 
 ```
